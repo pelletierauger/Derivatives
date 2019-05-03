@@ -1,0 +1,62 @@
+ffmpeg -f image2 -framerate 30 -i ./frames/sketch-%05d.png -s 500x500 ./derivatives.gif
+
+
+
+/frames/2/sketch
+
+
+ffmpeg -f image2 -framerate 30 -i ./frames/2/sketch-%05d.png -s 500x500 ./derivatives-2.gif
+
+
+ffmpeg -f image2 -framerate 24 -i ./frames/2/sketch-%05d.png -vf palettegen ./palette-2.png
+
+ffmpeg -f image2 -framerate 24 -i ./frames/2/sketch-%05d.png -i ./palette-2.png -lavfi paletteuse -s 500x500 ./derivatives-2.gif
+
+ffmpeg -f image2 -framerate 30 -i ./frames/2/sketch-%05d.png -i ./palette-2.png -lavfi paletteuse -s 500x500 ./derivatives-2-30fps.gif
+
+
+ffmpeg -f image2 -framerate 30 -i ./frames/2/sketch-%05d.png -c:v libx264 -s 1000x1000 -pix_fmt yuv420p ./derivatives-3.mp4
+
+
+ffmpeg -f image2 -framerate 30 -i ./frames/3/sketch-%05d.png -vf palettegen ./palette-3.png
+
+ffmpeg -f image2 -framerate 30 -i ./frames/3/sketch-%05d.png -i ./palette-3.png -lavfi paletteuse -s 500x500 ./derivatives-3-30fps.gif
+
+
+-------------Ici je suis parti de frames à 1000x1000, réduits à 500x500----------------------
+
+ffmpeg -f image2 -framerate 30 -i ./frames/4/sketch-%05d.png -i ./palette-3.png -lavfi paletteuse -s 500x500 ./derivatives-4-30fps.gif
+
+
+ffmpeg -f image2 -framerate 30 -i ./frames/4/sketch-%05d.png -i ./palette-3.png -lavfi paletteuse -s 750x750 ./derivatives-750x750.gif
+ffmpeg -f image2 -framerate 30 -i ./frames/4/sketch-%05d.png -i ./palette-3.png -lavfi paletteuse -s 700x700 ./derivatives-700x700.gif
+ffmpeg -f image2 -framerate 30 -i ./frames/4/sketch-%05d.png -i ./palette-3.png -lavfi paletteuse -s 650x650 ./derivatives-650x650.gif
+ffmpeg -f image2 -framerate 30 -i ./frames/4/sketch-%05d.png -i ./palette-3.png -lavfi paletteuse -s 640x640 ./derivatives-640x640.gif
+
+----------Ici j’ai réduit les frames initiaux de 1000x1000 à 500x500-------------------------
+
+ffmpeg -f image2 -framerate 30 -i ./frames/4b/sketch-%05d.png -vf palettegen ./palette-4b.png
+
+ffmpeg -f image2 -framerate 30 -i ./frames/4b/sketch-%05d.png -i ./palette-4b.png -lavfi paletteuse -s 500x500 ./derivatives-4b-30fps.gif
+
+
+ffmpeg -i ./frames/4/sketch-%05d.png -vf scale=500:500 ./frames/4b/sketch-%05d.png
+ffmpeg -i ./frames/4/sketch-%05d.png -vf scale=350:350 ./frames/350x350/sketch-%05d.png
+
+ffmpeg -i ./frames/4/sketch-%05d.png -vf scale=500x500:flags=lanczos ./frames/500x500-lanczos/sketch-%05d.png
+ffmpeg -f image2 -framerate 30 -i ./frames/500x500-lanczos/sketch-%05d.png -vf palettegen ./palette-500x500-lanczos.png
+
+ffmpeg -f image2 -framerate 30 -i ./frames/500x500-lanczos/sketch-%05d.png -i ./palette-500x500-lanczos.png -lavfi paletteuse ./derivatives-500x500-lanczos.gif
+
+
+scale=1920x1080:flags=lanczos
+
+
+ffmpeg -f image2 -framerate 30 -i ./frames/350x350/sketch-%05d.png -vf palettegen ./palette-350.png
+
+ffmpeg -f image2 -framerate 30 -i ./frames/350x350/sketch-%05d.png -i ./palette-350.png -lavfi paletteuse ./derivatives-350x350.gif
+
+ffmpeg -f image2 -framerate 30 -i ./frames/4/sketch-%05d.png -c:v libx264 -s 1000x1000 -pix_fmt yuv420p ./derivatives-4.mp4
+
+
+
